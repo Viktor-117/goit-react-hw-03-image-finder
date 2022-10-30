@@ -12,12 +12,11 @@ export default class App extends Component {
     this.setState({ imgName });
   };
   render() {
+    const { imgName } = this.state;
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {this.state.imgName ? (
-          <ImageGallery imgName={this.state.imgName} />
-        ) : null}
+        <ImageGallery imgName={imgName} />
         <ToastContainer autoClose={3000} theme="colored" />
       </div>
     );

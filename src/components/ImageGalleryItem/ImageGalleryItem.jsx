@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { ImageItem, ItemImage } from './ImageGalleryItem.styled';
 
-const ImageGalleryItem = ({ image, openModal }) => {
+export default function ImageGalleryItem({ image, openModal }) {
   const { webformatURL, largeImageURL, tags } = image;
   const handleImgClick = () => {
     openModal(largeImageURL);
@@ -14,9 +14,7 @@ const ImageGalleryItem = ({ image, openModal }) => {
       </ImageItem>
     </div>
   );
-};
-
-export default ImageGalleryItem;
+}
 
 ImageGalleryItem.propTypes = {
   image: PropTypes.shape({

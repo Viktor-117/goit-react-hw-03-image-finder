@@ -2,7 +2,7 @@ import ImageGalleryItem from '../ImageGalleryItem';
 import PropTypes from 'prop-types';
 import { ImageGalleryList } from './ImageGallery.syled';
 
-const ImageGallery = ({ images, openModal }) => {
+export default function ImageGallery({ images, openModal }) {
   return (
     <div>
       <ImageGalleryList>
@@ -12,11 +12,9 @@ const ImageGallery = ({ images, openModal }) => {
       </ImageGalleryList>
     </div>
   );
-};
+}
 
 ImageGallery.propTypes = {
   images: PropTypes.arrayOf(PropTypes.shape).isRequired,
   openModal: PropTypes.func.isRequired,
 };
-
-export default ImageGallery;

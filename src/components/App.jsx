@@ -6,9 +6,7 @@ import Searchbar from './Searchbar';
 import ImageGallery from './ImageGallery';
 import Button from './Button';
 import Modal from './Modal';
-
-axios.defaults.baseURL = 'https://pixabay.com/api';
-const KEY = '29668324-2d81c9a891a84ad6e09e5568c';
+import { KEY } from './service/api';
 
 export default class App extends Component {
   state = {
@@ -19,6 +17,7 @@ export default class App extends Component {
     isLoading: false,
     error: null,
     largeImage: null,
+    isButtonActive: false,
   };
 
   handleFormSubmit = imgName => {
@@ -57,6 +56,9 @@ export default class App extends Component {
       const response = await axios.get(url).catch(error => {
         this.setState({ status: 'rejected' });
       });
+      response.data.hits.length > 0
+        ? this.setState({ isButtonActive: true })
+        : this.setState({ isButtonActive: false });
       this.setState(prevState => ({
         images: [...prevState.images, ...response.data.hits],
         status: 'resolved',
@@ -66,7 +68,8 @@ export default class App extends Component {
   }
 
   render() {
-    const { images, status, isLoading, largeImage } = this.state;
+    const { images, status, isLoading, largeImage, isButtonActive } =
+      this.state;
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit} />
@@ -90,7 +93,7 @@ export default class App extends Component {
             />
           </div>
         )}
-        {status === 'resolved' && (
+        {isButtonActive === true && (
           <Button btnClick={this.handlePageIncrement} />
         )}
         <ToastContainer autoClose={3000} theme="colored" />
